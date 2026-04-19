@@ -1,3 +1,6 @@
+## MARKDOWN
+A practical Python project for analyzing production measurement data with outlier detection, Cp/Cpk evaluation and a Streamlit dashboard.
+
 ## OVERVIEW
 
 This project demonstrates how production data can be generated, analyzed and visualized using Python.

@@ -41,7 +41,9 @@ cp_w, cpk_w = calculate_cpk(data["widerstand"], WIDERSTAND_LSL, WIDERSTAND_USL)
 # ===== Übersicht =====
 st.subheader("📈 Überblick")
 
-col1, col2 = st.columns(2)
+st.subheader("📈 Überblick")
+
+col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
     st.metric("Messpunkte", len(data))
@@ -49,20 +51,14 @@ with col1:
 with col2:
     st.metric("Spannung Mittelwert", round(data["spannung"].mean(), 2))
 
-st.subheader("📏 Prozessfähigkeit")
-
-col3, col4 = st.columns(2)
-
 with col3:
-    st.metric("Cp Spannung", f"{cp_sp:.2f}")
-    st.metric("Cpk Spannung", f"{cpk_sp:.2f}")
-    st.write(evaluate_cpk(cpk_sp))
+    st.metric("Spannung StdAbw", round(data["spannung"].std(), 2))
 
 with col4:
-    st.metric("Cp Widerstand", f"{cp_w:.2f}")
-    st.metric("Cpk Widerstand", f"{cpk_w:.2f}")
-    st.write(evaluate_cpk(cpk_w))
+    st.metric("Widerstand Mittelwert", round(data["widerstand"].mean(), 2))
 
+with col5:
+    st.metric("Widerstand StdAbw", round(data["widerstand"].std(), 2))
 # ===== Verlauf =====
 st.subheader("📉 Verlauf")
 
