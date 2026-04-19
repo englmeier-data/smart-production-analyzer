@@ -11,6 +11,15 @@ def calculate_cpk(series, lower, upper):
 
     return cp, cpk
 
+def evaluate_cpk(cpk):
+    if cpk < 1:
+        return f"❌ kritisch (Cpk = {cpk:.2f})"
+    elif cpk < 1.33:
+        return f"⚠️ grenzwertig (Cpk = {cpk:.2f})"
+    else:
+        return f"✅ gut (Cpk = {cpk:.2f})"
+
+
 st.set_page_config(page_title="Production Dashboard", layout="wide")
 
 st.title("📊 Smart Production Analyzer")
@@ -47,13 +56,12 @@ col3, col4 = st.columns(2)
 with col3:
     st.metric("Cp Spannung", f"{cp_sp:.2f}")
     st.metric("Cpk Spannung", f"{cpk_sp:.2f}")
+    st.write(evaluate_cpk(cpk_sp))
 
 with col4:
     st.metric("Cp Widerstand", f"{cp_w:.2f}")
     st.metric("Cpk Widerstand", f"{cpk_w:.2f}")
-
-
-
+    st.write(evaluate_cpk(cpk_w))
 
 # ===== Verlauf =====
 st.subheader("📉 Verlauf")
