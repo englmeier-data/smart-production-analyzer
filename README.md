@@ -4,7 +4,7 @@ This project demonstrates how production data can be generated, analyzed and vis
 
 ## Dashboard Preview
 
-![Dachboard](Dashboard.png)
+![Dashboard](Dashboard.png)
 
 
 ## Use Case
