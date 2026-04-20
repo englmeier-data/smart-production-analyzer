@@ -13,6 +13,7 @@ def calculate_cpk(series, lower, upper):
 
     return cp, cpk
 
+
 def evaluate_cpk(cpk):
     if cpk < 1:
         return f"❌ kritisch (Cpk = {cpk:.2f})"
@@ -20,7 +21,9 @@ def evaluate_cpk(cpk):
         return f"⚠️ grenzwertig (Cpk = {cpk:.2f})"
     else:
         return f"✅ gut (Cpk = {cpk:.2f})"
-
+    
+def detect_outliers_limits(series, lower, upper):
+    return (series < lower) | (series > upper)
 
 st.set_page_config(page_title="Production Dashboard", layout="wide")
 
@@ -57,6 +60,16 @@ with col_settings2:
 # Cp/Cpk Berechnung
 cp_sp, cpk_sp = calculate_cpk(data["spannung"], SPANNUNG_LSL, SPANNUNG_USL)
 cp_w, cpk_w = calculate_cpk(data["widerstand"], WIDERSTAND_LSL, WIDERSTAND_USL)
+
+## Ausreißer berechnens 
+data["spannung_outlier"] = detect_outliers_limits(
+data["spannung"], SPANNUNG_LSL, SPANNUNG_USL
+)
+
+data["widerstand_outlier"] = detect_outliers_limits(
+    data["widerstand"], WIDERSTAND_LSL, WIDERSTAND_USL
+)
+
 
 # ===== Übersicht =====
 st.subheader("📈 Überblick")
