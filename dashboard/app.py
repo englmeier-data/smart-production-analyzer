@@ -41,8 +41,6 @@ cp_w, cpk_w = calculate_cpk(data["widerstand"], WIDERSTAND_LSL, WIDERSTAND_USL)
 # ===== Übersicht =====
 st.subheader("📈 Überblick")
 
-st.subheader("📈 Überblick")
-
 col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
@@ -59,6 +57,7 @@ with col4:
 
 with col5:
     st.metric("Widerstand StdAbw", round(data["widerstand"].std(), 2))
+
 # ===== Verlauf =====
 st.subheader("📉 Verlauf")
 
