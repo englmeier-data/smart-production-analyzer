@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+
 
 uploaded_file = st.file_uploader("CSV-Datei hochladen", type=["csv"])
 
@@ -94,12 +96,70 @@ with col5:
 # ===== Verlauf =====
 st.subheader("📉 Verlauf")
 
-st.line_chart(data["spannung"])
-st.line_chart(data["widerstand"])
+fig, ax = plt.subplots(figsize=(4.5, 2.5))
 
 
+# ##################### DIAGRAMME #####################
+
+col_plot1, col_plot2 = st.columns([1, 1])
+
+# ================== Spannung ==================
+with col_plot1:
+    fig1, ax1 = plt.subplots(figsize=(4.5, 2.5))
+
+    ax1.plot(data["spannung"], label="Spannung", linewidth=1, color="blue")
+
+    ax1.axhline(SPANNUNG_LSL, linestyle="--", linewidth=1, color="darkred", label="LSL")
+    ax1.axhline(SPANNUNG_USL, linestyle="--", linewidth=1, color="darkred", label="USL")
+    outliers_sp = data["spannung_outlier"]
+    
+    ax1.scatter(
+        data.index[outliers_sp],
+        data["spannung"][outliers_sp],
+        color="red",
+        marker="x",
+        s=25,
+        label="Ausreißer"
+    )
+
+    ax1.set_title("Spannung")
+    ax1.set_xlabel("Messpunkt")
+    ax1.set_ylabel("Spannung")
+    ax1.legend(fontsize=8, loc="upper right")
+    ax1.grid(True, linestyle=":", linewidth=0.5)
+    
+    st.pyplot(fig1)
+
+# ================== Widerstand ==================
+with col_plot2:
+    fig2, ax2 = plt.subplots(figsize=(4.5, 2.5))
+
+    ax2.plot(data["widerstand"], label="Widerstand", linewidth=1, color="blue")
+    
+    ax2.axhline(WIDERSTAND_LSL, linestyle="--", linewidth=1, color="darkred", label="LSL Widerstand")
+    ax2.axhline(WIDERSTAND_USL, linestyle="--", linewidth=1, color="darkred", label="USL Widerstand")
+  
+    outliers_w = data["widerstand_outlier"]
+    
+    ax2.scatter(
+        data.index[outliers_w],
+        data["widerstand"][outliers_w],
+        color="red",
+        marker="x",
+        s=25,
+        label="Ausreißer"
+    )
+
+    ax2.set_title("Widerstand")
+    ax2.set_xlabel("Messpunkt")
+    ax2.set_ylabel("Widerstand")
+    ax2.legend(fontsize=8, loc="upper right")
+    ax2.grid(True, linestyle=":", linewidth=0.5)
+
+    st.pyplot(fig2)
+    
 # ===== Ausreißer =====
-st.subheader("🚨 Ausreißer")
+#st.subheader("🚨 Ausreißer")
 
 spannung_outliers = data[data["spannung_outlier"]]
 widerstand_outliers = data[data["widerstand_outlier"]]
