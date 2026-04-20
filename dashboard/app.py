@@ -96,18 +96,19 @@ with col5:
 # ===== Verlauf =====
 st.subheader("📉 Verlauf")
 
-fig, ax = plt.subplots(figsize=(4.5, 2.5))
-
-
+# #####################################################
 # ##################### DIAGRAMME #####################
+# #####################################################
 
 col_plot1, col_plot2 = st.columns([1, 1])
+
 
 # ================== Spannung ==================
 with col_plot1:
     fig1, ax1 = plt.subplots(figsize=(4.5, 2.5))
+    
 
-    ax1.plot(data["spannung"], label="Spannung", linewidth=1, color="blue")
+    ax1.plot (data["spannung"], label="Spannung", linewidth=1, color="blue")
 
     ax1.axhline(SPANNUNG_LSL, linestyle="--", linewidth=1, color="darkred", label="LSL")
     ax1.axhline(SPANNUNG_USL, linestyle="--", linewidth=1, color="darkred", label="USL")
@@ -122,13 +123,12 @@ with col_plot1:
         label="Ausreißer"
     )
 
-    ax1.set_title("Spannung")
     ax1.set_xlabel("Messpunkt")
     ax1.set_ylabel("Spannung")
-    ax1.legend(fontsize=8, loc="upper right")
     ax1.grid(True, linestyle=":", linewidth=0.5)
-    
-    st.pyplot(fig1)
+    ax1.legend(fontsize=8, loc="upper right")
+
+    st.pyplot(fig1, use_container_width=True)
 
 # ================== Widerstand ==================
 with col_plot2:
@@ -153,11 +153,10 @@ with col_plot2:
     ax2.set_title("Widerstand")
     ax2.set_xlabel("Messpunkt")
     ax2.set_ylabel("Widerstand")
-    ax2.legend(fontsize=8, loc="upper right")
     ax2.grid(True, linestyle=":", linewidth=0.5)
+    ax2.legend(fontsize=8, loc="upper right")
 
-    st.pyplot(fig2)
-    
+    st.pyplot(fig2, use_container_width=True)
 # ===== Ausreißer =====
 #st.subheader("🚨 Ausreißer")
 
