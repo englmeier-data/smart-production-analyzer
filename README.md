@@ -19,7 +19,22 @@ The dashboard provides a quick overview of measurement trends, detected outliers
 - Outlier detection (Z-score)
 - Interactive dashboard
 - process capability analysis (Cp / Cpk) in script and dashboard
+- CSV upload support for custom datasets
+- configurable limits (LSL / USL)
+- limit-based outlier detection
+- Cp/Cpk calculation and evaluation
+
+## Visualization
+
+- dual plots for voltage and resistance
+- highlighted outliers (red markers)
+- limit lines (LSL / USL)
+- improved layout and readability
+
 
 ## Tech Stack
 Python, Pandas, Matplotlib, Streamlit
 
+# Notes
+
+This release represents a functional dashboard for analyzing production measurement data.
